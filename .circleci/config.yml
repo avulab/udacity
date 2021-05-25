@@ -8,21 +8,21 @@ commands:
     steps:
       - run: echo "[all]" >inventory
 jobs:
-  myjob:
+  create_infrastructure:
     executor: aws-cli/default
     steps:
       - checkout
       - aws-cli/setup:
           profile-name: example
+      - run: aws cloudformation create-stack --stack-name udacity --template-body file://template.yml
       - run: aws ec2 describe-instances  --query 'Reservations[*].Instances[*].PublicIpAddress'  --filters "Name=tag:Name,Values=Balakrishna Avula" --output text >> inventory
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
               - inventory
       - run: cat inventory
+      - run: aws cloudformation delete-stack --stack-name udacity
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  udacity:
     jobs:
-      - myjob
+      - create_infrastructure
