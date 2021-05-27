@@ -29,6 +29,10 @@ jobs:
           fingerprints:
             - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible # install the dependencies needed for your playbook
       - run: ansible-playbook -i inventory main_remote.yml --key-file=udacity.pem
 workflows:
   udacity:
