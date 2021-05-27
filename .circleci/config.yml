@@ -34,7 +34,8 @@ jobs:
           fingerprints:
             - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
             - "fb:d3:a8:e8:e0:8b:f6:e5:46:4c:d6:c4:ad:a2:e6:5b"
-      - run: echo yes|ansible-playbook -i inventory main_remote.yml
+      - run: ssh-keyscan -H ec2-34-221-206-69.us-west-2.compute.amazonaws.com >>~/.ssh/known_hosts
+      - run: ansible-playbook -i inventory main_remote.yml
 workflows:
   udacity:
     jobs:
