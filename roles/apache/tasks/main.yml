@@ -1,0 +1,7 @@
+ - name: Install Apache
+   apt: 
+     name: apache2
+ - name: Copy index.html
+   ansible.builtin.copy:
+     src: index.html
+     dest: /var/www/hmtl/index.html
