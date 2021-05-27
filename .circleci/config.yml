@@ -25,14 +25,15 @@ jobs:
     docker: 
       - image: python:3.7-alpine3.11
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
       - checkout
       - run:
           name: Install dependencies
           command: |
             apk add --update ansible # install the dependencies needed for your playbook
+      - add_ssh_keys:
+          fingerprints:
+            - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
+            - "fb:d3:a8:e8:e0:8b:f6:e5:46:4c:d6:c4:ad:a2:e6:5b"
       - run: echo yes|ansible-playbook -i inventory main_remote.yml
 workflows:
   udacity:
