@@ -33,7 +33,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible # install the dependencies needed for your playbook
-      - run: ansible-playbook -i inventory main_remote.yml
+      - run: echo yes|ansible-playbook -i inventory main_remote.yml
 workflows:
   udacity:
     jobs:
