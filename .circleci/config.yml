@@ -26,8 +26,8 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - add_ssh_keys:
-	  fingerprints:
-	    - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
+          fingerprints:
+            - "fe:ac:75:14:e3:81:6b:69:f9:2b:01:ba:5d:81:b4:b9"
       - checkout
       - run: ansible -i inventory main_remote.yml --key-file=udacity.pem
 workflows:
