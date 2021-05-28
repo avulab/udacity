@@ -53,6 +53,6 @@ jobs:
 workflows:
   udacity:
     jobs:
-      - create_infrastructure0
+      - create_infrastructure
       - configure_infrastructure
       - test_inf
