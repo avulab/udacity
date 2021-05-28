@@ -47,7 +47,7 @@ jobs:
       - run: curl -s --head "https://google.com"
       - run: curl -s --head "https://kantkapalem.com"
       - destroy_environments
-          when: on_fail
+        when: on_fail
 workflows:
   udacity:
     jobs:
