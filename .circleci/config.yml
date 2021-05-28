@@ -46,7 +46,7 @@ jobs:
     steps:
       - run: curl -s --head "https://google.com"
       - run: curl -s --head "https://kantkapalem.com"
-      - run: destroy_environments
+      - destroy_environments
           when: on_fail
 workflows:
   udacity:
