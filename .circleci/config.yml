@@ -53,4 +53,3 @@ workflows:
       - create_infrastructure
       - configure_infrastructure
       - test_inf
-      - destroy_envrionments
