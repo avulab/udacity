@@ -7,7 +7,6 @@ commands:
   print_pipeline_id:
     steps:
       - run: echo "[all]" >inventory
-jobs:
   destroy_environments:
     executor: aws-cli/default
     steps:
