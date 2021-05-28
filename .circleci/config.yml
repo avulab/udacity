@@ -11,14 +11,14 @@ jobs:
   destroy_environments:
     executor: aws-cli/default
     steps:
-      - run: aws cloudformation delete-stack --stack-name prod-${CIRCLECI_WORKFLOW_ID} 
+      - run: aws cloudformation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID} 
   create_infrastructure:
     executor: aws-cli/default
     steps:
       - checkout
       - aws-cli/setup:
           profile-name: example
-      - run: aws cloudformation create-stack --stack-name prod-${CIRCLECI_WORKFLOW_ID} --template-body file://template.yml
+      - run: aws cloudformation create-stack --stack-name prod-${CIRCLE_WORKFLOW_ID} --template-body file://template.yml
       - run: aws ec2 describe-instances  --query 'Reservations[*].Instances[*].PublicIpAddress'  --filters "Name=tag:Name,Values=Balakrishna Avula" --output text >> inventory
       - persist_to_workspace:
           root: /home/circleci/project
@@ -47,7 +47,7 @@ jobs:
       - run: curl -s --head "https://google.com"
       - run: curl -s --head "https://kantkapalem.com"
       - run: destroy_environments
-	  when: on_fail
+          when: on_fail
 workflows:
   udacity:
     jobs:
