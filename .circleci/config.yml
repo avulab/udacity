@@ -55,4 +55,8 @@ workflows:
     jobs:
       - create_infrastructure
       - configure_infrastructure
+          requires:
+            - create_infrastructure
       - test_inf
+          requires:
+            - configure_infrastructure
