@@ -23,7 +23,7 @@ jobs:
           root: /home/circleci/project
           paths:
               - inventory
-      - run: cat inventory
+      - run: cat inventory2
       - run:
           name: Destroy environment
           command: |
