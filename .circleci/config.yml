@@ -36,6 +36,7 @@ jobs:
       - aws-cli/setup:
           profile-name: example
       - run: aws cloudformation list-exports --query "Exports[?Name==\`PipelineID\`].Value"  --no-paginate --output text >>inventory
+      - run: cat inventory
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
