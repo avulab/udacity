@@ -35,10 +35,10 @@ jobs:
       - checkout
       - aws-cli/setup:
           profile-name: example
-      - run: aws cloudformation list-exports --query "Exports[?Name==\`PipelineID\`].Value"  --no-paginate --output text >lastpipe
-      - run: cat lastpipe
+      - run: aws cloudformation list-exports --query "Exports[?Name==\`PipelineID\`].Value"  --no-paginate --output text >~/lastpipe
+      - run: cat ~/lastpipe
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: ~/
           paths:
               - lastpipe
   create_and_deploy_front_end:
@@ -63,8 +63,8 @@ jobs:
           profile-name: example
       - attach_workspace:
           at: ~/
-      - run: aws s3 rm "s3://`cat /home/circleci/project/lastpipe`" --recursive
-      - run: aws cloudformation delete-stack --stack-name "prod-`cat /home/circleci/project/lastpipe`"
+      - run: aws s3 rm "s3://`cat ~/lastpipe`" --recursive
+      - run: aws cloudformation delete-stack --stack-name "prod-`cat ~/lastpipe`"
   configure_infrastructure:
     docker: 
       - image: python:3.7-alpine3.11
@@ -92,10 +92,10 @@ workflows:
       - create_and_deploy_front_end
       - get_last_deployment_id:
           requires:
-            - create_and_deploy_front_end
+            - promote_to_production
       - promote_to_production:
           requires:
-            - get_last_deployment_id
+            - create_and_deploy_front_end
       - clean_up_old_front_end:
           requires:
             - promote_to_production
