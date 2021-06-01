@@ -65,7 +65,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/lastpipe
-      - run: cat ~/lapipe|awk -F\- '{print $1}'
+      - run: cat ~/lastpipe|awk -F\- '{print $1}'
       - run: aws s3 rm "s3://`cat ~/lastpipe|awk -F\- '{print $1}'`" --recursive
       - run: aws cloudformation delete-stack --stack-name "prod-`cat ~/lastpipe|awk -F\- '{print $1}'`"
   configure_infrastructure:
